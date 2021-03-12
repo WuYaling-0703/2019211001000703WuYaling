@@ -6,6 +6,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.xml.transform.stream.StreamResult;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 // now its just a java class
 // extend HttpServlet
@@ -20,11 +24,12 @@ public class HelloWorldServlet extends HttpServlet {
         PrintWriter writer = response.getWriter();
         writer.println("Hello Client !!!"); //that all
         //next we need to tell about this servlet to tomcat - how ? - web.xml
-
-
     }
     public void doPost(HttpServletRequest request, HttpServletResponse response){
         //when client request method is Post -here- inside doPost()
 
     }
+
+
+
 }
