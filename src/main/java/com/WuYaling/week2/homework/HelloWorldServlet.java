@@ -24,12 +24,11 @@ public class HelloWorldServlet extends HttpServlet {
         PrintWriter writer = response.getWriter();
         writer.println("Hello Client !!!"); //that all
         //next we need to tell about this servlet to tomcat - how ? - web.xml
+
     }
     public void doPost(HttpServletRequest request, HttpServletResponse response){
         //when client request method is Post -here- inside doPost()
 
     }
-
-
 
 }

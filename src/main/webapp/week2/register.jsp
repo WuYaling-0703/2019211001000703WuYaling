@@ -146,7 +146,9 @@
                 <td>Email：</td>
                 <td>
                     <input type="text" name="mail" id="mail" value="" alt="Email" onblur="checked()"/>
-                    <span id="mailSpan"></span>
+                    <span id="mailSpan">
+                        <font>Valid email</font>
+                    </span>
                 </td>
             </tr>
 
@@ -154,6 +156,9 @@
                 <td>Birthdate：</td>
                 <td>
                     <input type="text" name="Birthdate" formate='YYYY-MM-DD'><br/>
+                    <span id="Birthdate">
+                        <font>Must be yyyy-dd-mm format</font>
+                    </span>
                 </td>
             </tr>
             <tr>
