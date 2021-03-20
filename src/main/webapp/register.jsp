@@ -11,14 +11,13 @@
     <title>Title</title>
 </head>
 <body>
-<form>
-    Username:<input type="text" name="Username"><br/>
-    Password:<input type="text" name="Password"><br/>
-    Email:<input type="text" name="Email"><br/>
-    Sex:
-    <label for="Radio1">Male</label><input id="Radio1" type="radio" value="Male" name="Sex" checked="checked"/>
-    <label for="Radio2">Female</label><input id="Radio2" type="radio" value="Female" name="Sex"   /><br/>
-    Birthdate:<input type="text" name="Birthdate" formate='YYYY-MM-DD'><br/>
+<form method="post" action="register"> <!--within doPost() in servlet-->
+    Username:<input type="text" name="username"><br/>
+    Password:<input type="text" name="password"><br/>
+    Email:<input type="text" name="email"><br/>
+    Gender: <input type="radio" name="gender" value="male">Male<input type="radio" name="gender" value="female">Female<br/>
+    <!--if name is same it make array -->
+    Date of Birth:<input type="text name" name="birthdate" ><br/>
     <input type="submit" value="Register"/>
 </form>
 </body>
