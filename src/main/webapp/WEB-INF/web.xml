@@ -4,6 +4,8 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
     <!--add code about new servlet-->
+    <!--using SQL server db, ,i want to change mysql db-->
+
     <servlet>
         <servlet-name>yaling</servlet-name> <!--give any name -->
         <servlet-class>com.WuYaling.week2.homework.HelloWorldServlet</servlet-class> <!--package + name of servlet class-->
@@ -13,10 +15,30 @@
         <servlet-class>com.WuYaling.week3.demo.LifeCycleServlet</servlet-class>
     </servlet>
     <!--automatic code -->
+    <!--
     <servlet>
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>com.WuYaling.week3.demo.RegisterServlet</servlet-class>
     </servlet>
+    -->
+    <!--
+    <servlet>
+        <servlet-name>ConfigDemoServlet</servlet-name>
+        <servlet-class>com.WuYaling.week4.demo.ConfigDemoServlet</servlet-class>
+        <init-param>
+            <param-name>name</param-name>
+            <param-value>WuYaling</param-value>
+        </init-param>
+        <init-param>
+            <param-name>studentId</param-name>
+            <param-value>2019211001000703</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ConfigDemoServlet</servlet-name>
+        <url-pattern>/config</url-pattern>
+    </servlet-mapping>
+-->
     <servlet-mapping>
     <servlet-name>yaling</servlet-name>
     <url-pattern>/hello</url-pattern> <!--url must start with /-->
@@ -27,8 +49,11 @@
         <url-pattern>/life</url-pattern>
         <!--/life == LifeCycleServlet == com.WuYaling.week3.demo.LifeCycleServlet-->
     </servlet-mapping>
+    <!--
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
-        <url-pattern>/register</url-pattern> <!--write this url in action -->
+        <url-pattern>/register</url-pattern> write this url in action
     </servlet-mapping>
+    -->
+
 </web-app>
