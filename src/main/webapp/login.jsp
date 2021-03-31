@@ -8,10 +8,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%@include file="header.jsp"%>
-<form>
-<sapn style="">Login</sapn><br/><br/>
-<sapn style="">Username</sapn> <input type="text" name="name" required="true" style=""><br/><br/>
-<sapn style="">Password</sapn> <input type="password" name="password" required="true" style=""><br/><br/>
-<input type="submit" value="Login" style="...">
+<h1>Login</h1>
+<form method="post" action="/2019211001000703WuYaling_war_exploded/login">
+    <table>
+        <tr> <td>username:</td> <td><input type="text" name="username" required><br/></td></tr>
+        <tr> <td>password:</td> <td><input type="password" name="password" required minlength="8"><br/></td></tr>
+        <tr> <td></td><td><input type="submit" value="Login"/></td>  </tr>
+    </table>
 </form>
 <%@include file="footer.jsp"%>
