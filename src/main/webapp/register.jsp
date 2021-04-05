@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@include file="header.jsp"%>
-<form>
+<form method="post" action="/2019211001000703WuYaling_war_exploded/register">
     <sapn style="">This is my register JSP page</sapn><br/><br/>
     <sapn style="">Username</sapn> <input type="text" name="name" required="true" style=""><br/><br/>
     <sapn style="">Password</sapn> <input type="password" name="password" required="true" style=""><br/><br/>
