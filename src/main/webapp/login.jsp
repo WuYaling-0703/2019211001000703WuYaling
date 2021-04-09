@@ -9,7 +9,13 @@
 
 <%@include file="header.jsp"%>
 <h1>Login</h1>
-<form method="post" action="/2019211001000703WuYaling_war_exploded/login">
+<%
+    if(!(request.getAttribute("message")==null)){
+       out.println(request.getAttribute("message")+"</h3>");
+
+    }
+%>
+<form method="post" action="login">
     <table>
         <tr> <td>username:</td> <td><input type="text" name="username" required><br/></td></tr>
         <tr> <td>password:</td> <td><input type="password" name="password" required minlength="8"><br/></td></tr>

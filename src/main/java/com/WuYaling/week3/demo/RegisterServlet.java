@@ -13,16 +13,18 @@ import java.text.SimpleDateFormat;
 
 
 @WebServlet(
-        urlPatterns = {"/register"})
+    urlPatterns = {"/register"},loadOnStartup = 1)
 
 public class RegisterServlet extends HttpServlet {
     Connection con=null;  //class variable
     @Override
     public void init() throws ServletException {
-        String driver = getServletConfig().getServletContext().getInitParameter("driver");
-        String url = getServletConfig().getServletContext().getInitParameter("url");
-        String username = getServletConfig().getServletContext().getInitParameter("username");
-        String password = getServletConfig().getServletContext().getInitParameter("password");
+        super.init();
+       /* ServletContext context=getServletContext();
+        String driver = context.getInitParameter("driver");
+        String url = context.getInitParameter("url");
+        String username = context.getInitParameter("username");
+        String password = context.getInitParameter("password");
 
         try {
             Class.forName(driver);
@@ -34,76 +36,73 @@ public class RegisterServlet extends HttpServlet {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-        }
+        }*/
+        con=(Connection) getServletContext().getAttribute("con");
     }
+
 
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doPost(request,response);
+
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 // request come here- <from method=post>
         //get parameter from request
-        String Username=request.getParameter("Username");//name of input type -<input type="text" name="username">
+        PrintWriter writer = response.getWriter();
+        String id=request.getParameter("id");
+        String username=request.getParameter("username");//name of input type -<input type="text" name="username">
         String password=request.getParameter("password");//<input type="text" name="password">
-        String Email=request.getParameter("Email");//<input type="text" name="Email">
-        String Gender=request.getParameter("Gender");//<input type="radio" name="gender">
-        String BirthDate=request.getParameter("BirthDate");//<input type="text name" name="birthdate" >
+        String email=request.getParameter("email");//<input type="text" name="Email">
+        String gender=request.getParameter("gender");//<input type="radio" name="gender">
+        String birthdate=request.getParameter("birthdate");//<input type="text name" name="birthdate" >
+
         String sql1="insert into Usertable values(?,?,?,?,?)";
         PreparedStatement pstmt= null;
         try {
             pstmt = con.prepareStatement(sql1);
-            pstmt.setString(1,Username);
+            pstmt.setString(1,username);
             pstmt.setString(2,password);
-            pstmt.setString(3,Email);
-            pstmt.setString(4,Gender);
-            pstmt.setString(5,BirthDate);
+            pstmt.setString(3,email);
+            pstmt.setString(4,gender);
+            pstmt.setString(5,birthdate);
             pstmt.executeUpdate();
+            response.sendRedirect("login.jsp");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        response.setContentType("text/html");
-        PrintWriter out=response.getWriter();
-        out.println("<html>");
-        out.println("<head><title>Register</title></head>");
-        out.println("<body>");
-        out.println("<table>");
-        out.println("<tr><td>ID</td><td>username</td><td>password</td><td>Email</td><td>Gender</td><td>Birthdate</td></tr>");
-        String sql2="select * from Usertable";
-        ResultSet rs= null;
-        try {
-            rs = con.createStatement().executeQuery(sql2);
+
+           /* sql="select id,username.password,email,gender,birthdate from usertable";
+            ResultSet rs=st.executeQuery(sql);
+            PrintWriter out=response.getWriter();
+            /*out.println("<html><title></title><body><table border=1><tr>");
+            out.println("<td>Username</td><td>password</td><td>Email</td><td>Gender</td><td>Birthdate</td></tr>");
             while(rs.next()){
-                int id=rs.getInt("id");
-                String username=rs.getString("username");
-                String password1=rs.getString("password");
-                String email=rs.getString("email");
-                String gender=rs.getString("gender");
-                Date birthdate=rs.getDate("birthdate");
-                SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-                out.println("<tr><td>"+id+"</td><td>"+username+"</td><td>"+password1+"</td><td>"+email+"</td><td>"+gender+"</td><td>"+sdf.format(birthdate)+"</td></tr>");
+                out.println("<tr>");
+                out.println("<td>"+rs.getString("username")+"</td>");
+                out.println("<td>"+rs.getString("password")+"</td>");
+                out.println("<td>"+rs.getString("email")+"</td>");
+                out.println("<td>"+rs.getString("gender")+"</td>");
+                out.println("<td>"+rs.getString("birthdate")+"</td>");
+
+                out.println("</tr>");
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        out.println("</table>");
-        out.println("</body>");
-        out.println("</html>");
+            out.println("</table></body></html>");
+            request.setAttribute("name",rs); //name - string , value - any type (object)
+            request.getRequestDispatcher("userList.jsp").forward(request,response);
+            //after this point request given to userList.jsp
+            //no more here
+            System.out.println("i am in RegisterServlet-- doPost()--> after forward()");//not see this line
+            */
+
+
+
     }
 
 
-
-    @Override
-    public void destroy() {
-        super.destroy();
-        try {
-            con.close();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
     }
 
 
