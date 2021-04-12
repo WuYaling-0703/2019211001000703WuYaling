@@ -12,6 +12,7 @@ public class SearchServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         String txt=request.getParameter("txt");
+
         String type=request.getParameter("search");
         if(txt==null) response.sendRedirect("index.jsp");
         else {
