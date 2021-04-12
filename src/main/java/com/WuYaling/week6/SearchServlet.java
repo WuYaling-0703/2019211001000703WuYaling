@@ -11,23 +11,19 @@ public class SearchServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        String searchText = request.getParameter("searchText");
-        String searchTool = request.getParameter("searchTool");
-
-        if (searchText == null || "".equals(searchText)) {
-            response.sendRedirect("index.jsp");
-        } else {
-
-            if ("baidu".equals(searchTool)) {
-                response.sendRedirect("https://www.baidu.com/s?wd=" + searchText);
-            } else if ("bing".equals(searchTool)) {
-                response.sendRedirect("https://cn.bing.com/search?q=" + searchText);
-            } else if ("google".equals(searchTool)) {
-                response.sendRedirect("https://www.google.com/search?q=" + searchText);
-
-            }
-
+        String txt=request.getParameter("txt");
+        String type=request.getParameter("search");
+        if(txt==null) response.sendRedirect("index.jsp");
+        else {
+            if(type.equals("baidu"))
+                response.sendRedirect("https://www.baidu.com/s?wd="+txt);
+            else if(type.equals("bing"))
+                response.sendRedirect("https://cn.bing.com/search?q="+txt);
+            else if(type.equals("google"))
+                response.sendRedirect("https://www.google.com/search?q="+txt);
         }
+
+
 
 
     }
