@@ -86,5 +86,7 @@
         <param-name>password</param-name>
         <param-value>wyl20010808</param-value>
     </context-param>
-
+<welcome-file-list>
+    <welcome-file>home</welcome-file> <!--when you run app,first request send to home-->
+</welcome-file-list>
 </web-app>

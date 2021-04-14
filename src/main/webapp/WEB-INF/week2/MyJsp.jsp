@@ -18,7 +18,7 @@
     </script>
 </head>
 <body>
-<a href="../index.jsp">go to ecjtu </a><!-- method is GET -->
+<a href="../../index.jsp">go to ecjtu </a><!-- method is GET -->
 <form method="post"> <!--what is method when we use form ? --> <!--its GET,why? default is GET ,
 form data is added in the URL , u can see -->
 <!--its better to use POST in form , data in not added in the URL-->
