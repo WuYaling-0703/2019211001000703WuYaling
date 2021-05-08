@@ -26,24 +26,24 @@ public class UpdateUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int Id= Integer.parseInt(request.getParameter("Id"));
         String Username=request.getParameter("Username");
-        String password=request.getParameter("password");
+        String Password=request.getParameter("Password");
         String Email=request.getParameter("Email");
         String Gender=request.getParameter("Gender");
         try {
             SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-            Date Date=sdf.parse(request.getParameter("Birthdate"));
+            Date Birthdate=sdf.parse(request.getParameter("Birthdate"));
             User user=new User();
             user.setId(Id);
             user.setUsername(Username);
-            user.setPassword(password);
+            user.setPassword(Password);
             user.setEmail(Email);
             user.setGender(Gender);
-            user.setBirthdate(Date);
+            user.setBirthdate(Birthdate);
             UserDao userDao=new UserDao();
             Connection con = (Connection) getServletContext().getAttribute("con");
             try {
                 if(userDao.updateUser(con,user)!=0) {
-                    User user1=userDao.findByUsernamePassword(con,Username,password);
+                    User user1=userDao.findByUsernamePassword(con,Username,Password);
                     HttpSession session=request.getSession();
                     session.setMaxInactiveInterval(10);
                     session.setAttribute("user",user1);
