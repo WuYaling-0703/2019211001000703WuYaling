@@ -15,11 +15,35 @@
 
     }
 %>
-<form method="post" action="login">
-    <table>
-        <tr> <td>username:</td> <td><input type="text" name="username" required><br/></td></tr>
-        <tr> <td>password:</td> <td><input type="password" name="password" required minlength="8"><br/></td></tr>
-        <tr> <td></td><td><input type="submit" value="Login"/></td>  </tr>
-    </table>
+<%
+    //read cookies
+    Cookie[] allcookies=request.getCookies(); //give all cookies
+    String username="",password="",rememberMeVal="";
+    if(allcookies!=null) {
+        for (Cookie c:allcookies) {
+            if (c.getName().equals("cUsername")){
+            username = c.getValue();
+            }
+            if (c.getName().equals("cPassword")){
+            password = c.getValue();
+            }
+            if(c.getName().equals("cRememberMe")){
+            rememberMeVal=c.getValue();
+            }
+        }
+    }
+
+
+%>
+<form  id="LoginForm" method="post" action="<%=request.getContextPath()+"/login"%>">
+    <label for="username">UserName</label>
+    <input id="username" name="username" type="text" value="<%=username%>"> <br/>
+
+    <label for="username">Password</label>
+    <input id="password" name="password" type="password" value="<%=password%>"> <br/>
+
+    <input type="checkbox" name="rememberMe" value="1" <%=rememberMeVal.equals("")?"checked":""%>>Remember Me<br/>
+
+    <input class="submit" type="submit" value="Login">
 </form>
 <%@include file="footer.jsp"%>
