@@ -17,8 +17,6 @@ import java.util.Date;
 public class UpdateUserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //TODO 1:forward to WEB-INF/views/updateUser.jsp
-        //TODO 2:create one jsp page - update user
         request.getRequestDispatcher("WEB-INF/views/updateUser.jsp").forward(request,response);
     }
 
@@ -26,28 +24,28 @@ public class UpdateUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int Id= Integer.parseInt(request.getParameter("Id"));
         String Username=request.getParameter("Username");
-        String Password=request.getParameter("Password");
+        String password=request.getParameter("password");
         String Email=request.getParameter("Email");
         String Gender=request.getParameter("Gender");
         try {
             SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-            Date Birthdate=sdf.parse(request.getParameter("Birthdate"));
+            Date Date=sdf.parse(request.getParameter("Date"));
             User user=new User();
             user.setId(Id);
             user.setUsername(Username);
-            user.setPassword(Password);
+            user.setPassword(password);
             user.setEmail(Email);
             user.setGender(Gender);
-            user.setBirthdate(Birthdate);
+            user.setBirthdate(Date);
             UserDao userDao=new UserDao();
             Connection con = (Connection) getServletContext().getAttribute("con");
             try {
                 if(userDao.updateUser(con,user)!=0) {
-                    User user1=userDao.findByUsernamePassword(con,Username,Password);
+                    User user1=userDao.findByUsernamePassword(con,Username,password);
                     HttpSession session=request.getSession();
                     session.setMaxInactiveInterval(10);
                     session.setAttribute("user",user1);
-                    request.getRequestDispatcher("WEB-INF/views/userInfo.jsp").forward(request, response);
+                    request.getRequestDispatcher("accountDetails").forward(request, response);
                 }
             } catch (SQLException throwable) {
                 throwable.printStackTrace();
