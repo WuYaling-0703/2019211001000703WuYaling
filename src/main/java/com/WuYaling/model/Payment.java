@@ -16,6 +16,7 @@ import java.util.Set;
  * Payment entity. @author MyEclipse Persistence Tools
  */
 
+
 @SuppressWarnings("serial")
 public  class Payment implements java.io.Serializable {
 	// Fields
@@ -82,7 +83,7 @@ public  class Payment implements java.io.Serializable {
 				list.add(c);
 			}
 		} catch (Exception re) {
-		try {
+			try {
 				throw re;
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -90,24 +91,24 @@ public  class Payment implements java.io.Serializable {
 		}
 		return list;
 	}
-public static String findByPaymentId(Connection con,int paymentId){
-	String paymentType=null;
-	try {
-		String queryString = "select PaymentType from  Payment where PaymentId=?";
-		PreparedStatement	statement = con.prepareStatement(queryString);
-		statement.setInt(1, paymentId);
-		ResultSet resultSet = statement.executeQuery();
-		while(resultSet.next()){
-			paymentType=resultSet.getString("PaymentType");
-		}
-	} catch (Exception re) {
+	public static String findByPaymentId(Connection con,int paymentId){
+		String paymentType=null;
 		try {
-			throw re;
-		} catch (Exception e) {
-			e.printStackTrace();
+			String queryString = "select PaymentType from  Payment where PaymentId=?";
+			PreparedStatement	statement = con.prepareStatement(queryString);
+			statement.setInt(1, paymentId);
+			ResultSet resultSet = statement.executeQuery();
+			while(resultSet.next()){
+				paymentType=resultSet.getString("PaymentType");
+			}
+		} catch (Exception re) {
+			try {
+				throw re;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+		return paymentType;
 	}
-	return paymentType;
-}
 
 }

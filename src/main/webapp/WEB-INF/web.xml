@@ -102,14 +102,14 @@
     </filter-mapping>
     <!-- 1st -->
 
-    <filter>
+    <!--<filter>
          <filter-name>HelloServlet</filter-name>
          <filter-class>com.WuYaling.filter.HelloFilter</filter-class>
      </filter>
      <filter-mapping>
          <filter-name>HelloFilter</filter-name>
-         <url-pattern>/hello</url-pattern> <!--url of HelloServlet-->
-    </filter-mapping>
+         <url-pattern>/hello</url-pattern> url of HelloServlet
+    </filter-mapping> -->
 
     <!--2nd -write after ist one in web.xml-->
     <filter>
@@ -122,5 +122,21 @@
     </filter-mapping>
 
     <!--3rd-->
+
+
+    <welcome-file-list>
+        <welcome-file>home</welcome-file>
+    </welcome-file-list>
+
+
+    <filter>
+        <filter-name>YourNameFilter</filter-name>
+        <filter-class>com.lab2.YourNameFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>YourNameFilter</filter-name>
+        <url-pattern>/lab2/welcome.jsp</url-pattern>
+        <url-pattern>/lab2/validation.jsp</url-pattern>
+    </filter-mapping>
 
 </web-app>
