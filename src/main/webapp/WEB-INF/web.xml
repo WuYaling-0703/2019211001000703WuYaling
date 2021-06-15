@@ -92,6 +92,7 @@
     <welcome-file>home</welcome-file> <!--when you run app,first request send to home-->
 </welcome-file-list>
 
+    <!--
     <filter>
         <filter-name>AuthFilter</filter-name>
         <filter-class>com.WuYaling.filter.AuthFilter</filter-class>
@@ -100,6 +101,7 @@
         <filter-name>AuthFilter</filter-name>
         <url-pattern>/hello</url-pattern>
     </filter-mapping>
+    -->
     <!-- 1st -->
 
     <!--<filter>
@@ -111,7 +113,7 @@
          <url-pattern>/hello</url-pattern> url of HelloServlet
     </filter-mapping> -->
 
-    <!--2nd -write after ist one in web.xml-->
+    <!--2nd -write after ist one in web.xml
     <filter>
         <filter-name>LoggerFilter</filter-name>
         <filter-class>com.WuYaling.filter.LoggerFilter</filter-class>
@@ -121,13 +123,12 @@
         <url-pattern>/hello</url-pattern>
     </filter-mapping>
 
-    <!--3rd-->
+    <!-3rd-->
 
 
     <welcome-file-list>
         <welcome-file>home</welcome-file>
     </welcome-file-list>
-
 
     <filter>
         <filter-name>YourNameFilter</filter-name>
