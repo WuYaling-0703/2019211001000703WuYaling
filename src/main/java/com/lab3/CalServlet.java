@@ -6,103 +6,71 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 
 
-@WebServlet(name = "CalServlet", value = "/CalServlet")
+@WebServlet(name = "CalServlet", value = "/lab3/CalServlet")
 public class CalServlet extends HttpServlet {
-    //todo 1: create a method to add(int firstVal, int secondVal) two number
-    public double add(double firstVal,double secondVal){
-        return firstVal+secondVal;
+
+    int add(int a,int b){
+        return  a+b;
     }
-    //todo 2: create a method to subtract two number
-    public double subtract(double firstVal,double secondVal){
-        return firstVal-secondVal;
+    int subtract(int a,int b){
+        return a-b;
     }
-    //todo 3: create a method to multiply two number
-    public double multiply(double firstVal,double secondVal){
-        return firstVal*secondVal;
+    int multiply (int a,int b){
+        return a*b;
     }
-    //todo 4: create a method to divide two number
-    public double divide(double firstVal,double secondVal){
-        return firstVal/secondVal;
+    int divide(int a,int b) {
+        return a/b;
     }
-    //todo 5: create a method to computeLength of a string
-    public int computerLength(String name){
-        return name.trim().length();
+    int computeLength(String str) {
+        return str.length();
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request, response);
+        doPost(request,response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //todo 6: get all request parameters- firstValue , secondValue,name,action
-        double firstVal=request.getParameter("firstVal")!=null?Double.parseDouble(request.getParameter("firstVal")):0.0;
-        double secondVal=request.getParameter("secondVal")!=null?Double.parseDouble(request.getParameter("secondVal")):0.0;
-        String name=request.getParameter("name");
-        String action=request.getParameter("action");
-        //todo 7: use if else to determine action is add or subtract or multiply or divide or computerLength
-        //todo 8 : call method add, subtract , multiply, divide or computeLength based on action and get the calculated result
-        //todo 9: if action =add or subtract or multiply or divide
-        //todo 10 :create 3 cookie name cFirstValue, cSecondValue,cResult and set the value of cookie
-        //todo 11 : add 3 cookies into response
-        if(action.equals("add")){
-            double result=add(firstVal,secondVal);
-            Cookie cFirstValue=new Cookie("cFirstVal",String.valueOf(firstVal));
-            Cookie cSecondValue=new Cookie("cSecondVal",String.valueOf(secondVal));
-            Cookie cResult=new Cookie("cResult",String.valueOf(result));
-            //cFirstValue.setMaxAge(5);
-            //cSecondValue.setMaxAge(5);
-            //cResult.setMaxAge(5);
-            response.addCookie(cFirstValue);
-            response.addCookie(cSecondValue);
-            response.addCookie(cResult);
-        }else if(action.equals("subtract")){
-            double result=subtract(firstVal,secondVal);
-            Cookie cFirstValue=new Cookie("cFirstVal",String.valueOf(firstVal));
-            Cookie cSecondValue=new Cookie("cSecondVal",String.valueOf(secondVal));
-            Cookie cResult=new Cookie("cResult",String.valueOf(result));
-            //cFirstValue.setMaxAge(5);
-            //cSecondValue.setMaxAge(5);
-            //cResult.setMaxAge(5);
-            response.addCookie(cFirstValue);
-            response.addCookie(cSecondValue);
-            response.addCookie(cResult);
-        }else if(action.equals("multiply")){
-            double result=multiply(firstVal,secondVal);
-            Cookie cFirstValue=new Cookie("cFirstVal",String.valueOf(firstVal));
-            Cookie cSecondValue=new Cookie("cSecondVal",String.valueOf(secondVal));
-            Cookie cResult=new Cookie("cResult",String.valueOf(result));
-            //cFirstValue.setMaxAge(5);
-            //cSecondValue.setMaxAge(5);
-            //cResult.setMaxAge(5);
-            response.addCookie(cFirstValue);
-            response.addCookie(cSecondValue);
-            response.addCookie(cResult);
-        }else if(action.equals("divide")){
-            double result=divide(firstVal,secondVal);
-            Cookie cFirstValue=new Cookie("cFirstVal",String.valueOf(firstVal));
-            Cookie cSecondValue=new Cookie("cSecondVal",String.valueOf(secondVal));
-            Cookie cResult=new Cookie("cResult",String.valueOf(result));
-            //cFirstValue.setMaxAge(5);
-            //cSecondValue.setMaxAge(5);
-            //cResult.setMaxAge(5);
-            response.addCookie(cFirstValue);
-            response.addCookie(cSecondValue);
-            response.addCookie(cResult);
+
+        if(request.getParameter("computerLength") != null){
+            String str=request.getParameter("name").trim();
+            int length=computeLength(str);
+            Cookie c1=new Cookie("cName",str);
+            Cookie c2=new Cookie("cLength",Integer.toString(length));
+
+            response.addCookie(c1);
+            response.addCookie(c2);
+            c1.setMaxAge(5);
+            c2.setMaxAge(5);
+        }else{
+
+            String firstValue=request.getParameter("firstValue");
+            String secondValue=request.getParameter("secondValue");
+            int n1=Integer.valueOf(firstValue);
+            int n2=Integer.valueOf(secondValue);
+
+            int cResult=0;
+            if(request.getParameter("add") != null){
+                cResult=add(n1,n2);
+            }else if(request.getParameter("subtract") != null){
+                cResult=subtract(n1,n2);
+            }else if(request.getParameter("multiply") != null){
+                cResult=multiply(n1,n2);
+            }else if(request.getParameter("divide") != null){
+
+                cResult=divide(n1,n2);
+            }
+            Cookie c3=new Cookie("cFirstValue",Integer.toString(n1));
+            Cookie c4=new Cookie("cSecondValue",Integer.toString(n2));
+            Cookie c5=new Cookie("cResult",Integer.toString(cResult));
+
+
+
+            response.addCookie(c3);
+            response.addCookie(c4);
+            response.addCookie(c5);
+            c3.setMaxAge(5);c4.setMaxAge(5);c5.setMaxAge(5);
         }
-        //todo 12: if action =computeLength
-        //todo 13 :create 2 cookies name cName, cLength and set the value
-        //todo 14 : add 2 cookies into response
-        else if(action.equals("computeLength")){
-            double result=computerLength(name);
-            Cookie cName=new Cookie("cName",name);
-            Cookie cLength=new Cookie("cLength",String.valueOf(result));
-            //cName.setMaxAge(5);
-            //cLength.setMaxAge(5);
-            response.addCookie(cName);
-            response.addCookie(cLength);
-        }
-        //todo 13 : send redirect to cal.jsp
-        response.sendRedirect("/2019211001000713ZhouWeiqiang_war_exploded/lab3/cal.jsp");
+        response.sendRedirect("/2019211001000709JiangTao_war_exploded/lab3/cal.jsp");
     }
 }
